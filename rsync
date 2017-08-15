@@ -1,1 +1,0 @@
-rsync -rtv ./* root@localhost:/var/www/blog
