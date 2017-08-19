@@ -1,0 +1,12 @@
+#!/usr/bin/env python
+#-*- coding:utf-8 -*-
+#author: Abel Lee
+#date: 2017
+#Copyright: free
+
+ERR_CODE_INVALID_REQUEST = 1000
+ERR_CODE_PERMISSION_FORBIDDEN = 1002
+ERR_CODE_INVALID_REQUEST_PARAM = 1003
+
+ERR_CODE_INTERNAL_ERROR = 5000
+ERR_CODE_SERVER_UPDAT = 5002
