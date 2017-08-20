@@ -29,3 +29,13 @@ class Error(object):
     
     def err_msg(self):
         return self.msg
+
+def return_error(err, data=""):
+    return {"ret_code": err.err_code(),
+            "ret_msg": err.err_msg(),
+            "data": data}
+
+def return_success(data=""):
+    return {"ret_code": 0,
+            "ret_msg": "succeed",
+            "data": data}

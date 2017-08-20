@@ -4,5 +4,4 @@
 #date: 2017
 #Copyright: free
 
-API_REQUEST_TYPE = "api"
-APISERVER_LOG_FILE = "/tmp/apiserver.log"
+LOG_FILE_PATH = "/tmp/blog/blog.log"
