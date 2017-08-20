@@ -15,7 +15,7 @@ def __log_init():
         logging.basicConfig(level=logging.DEBUG,  
                     filename=LOG_FILE_PATH,
                     filemode='a',  
-                    format='%(asctime)s - %(filename)s[line:%(lineno)d] - %(levelname)s: %(message)s')
+                    format='%(asctime)s - %(levelname)s: %(message)s')
         g_log_init = True
 
 def log_info(logstr):

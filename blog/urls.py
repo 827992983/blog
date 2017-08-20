@@ -21,5 +21,5 @@ urlpatterns = [
     url(r'^login', admin_views.login, name='login'),
     url(r'^logout', admin_views.logout, name='logout'),
     url(r'^admin', admin_views.index, name='admin'),
-    url(r'^', articles_views.index, name='index'),
+    url(r'^$', articles_views.index, name='home'),
 ]
