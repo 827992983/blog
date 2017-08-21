@@ -77,13 +77,16 @@ def login(request):
 
 def logout(request):
     try:
+        log_error('---logout......')
         if request.method == 'GET':
             username = request.GET['username']
-            if username:
-                del request.session[username]
+            log_error('------username:%s' % username)
+            if username == request.session.get('username', ''):
+                del request.session['username']
         ret = return_success()
     except Exception,e:
         log_error('logout with Exception:%s' % e)
         ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
                                  ErrMsg.ERR_MSG_INTERNAL_ERROR))
+
     return HttpResponse(json.dumps(ret))

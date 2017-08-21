@@ -23,16 +23,13 @@ function login() {
             success: function (result) {
                 //alert(JSON.stringify(result));
                 if (result.ret_code == 0) {
-                window.location = '/admin';
-                //window.location.reload();
-                    //
-                   // window.location.href = "${ctx}${url_kw}" + username;
+                    window.location = '/admin?username=' + result.data.username;
                 }else{
                     alert("登录失败");
                 }
             },
             beforeSend: function (xhr) {
-                xhr.setRequestHeader('X-CSRFToken', getCookie("csrftoken"))
+                xhr.setRequestHeader('X-CSRFToken', getCookie("csrftoken"));
             }
     });
 }
