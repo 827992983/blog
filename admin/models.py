@@ -23,6 +23,7 @@ class User(models.Model):
 
 class Article(models.Model):
     article_id = models.CharField(max_length=128, primary_key=True)
+    type_id =  models.CharField(max_length=128, default='')
     status = models.CharField(max_length=64)
     auther = models.CharField(max_length=64)
     htlm_context = models.TextField(default='')
@@ -31,7 +32,7 @@ class Article(models.Model):
     def __unicode__(self):
         return self.article_id
 
-class AtricleType(models.Model):
+class ArticleType(models.Model):
     type_id = models.CharField(max_length=128, primary_key=True)
     type_name = models.CharField(max_length=64)
     description = models.CharField(max_length=256, default='')

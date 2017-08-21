@@ -9,11 +9,7 @@ import datetime
 import time
 
 def uuid1():
-    return uuid.uuid1()
-
-def uuid3():
-    return uuid3()
-
+    return str(uuid.uuid1())
 
 # '2015-08-28 16:43:37.283' --> 1440751417.283
 # '2015-08-28 16:43:37' --> 1440751417.0
