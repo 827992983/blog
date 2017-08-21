@@ -21,9 +21,9 @@ function login() {
             data: JSON.stringify(data),
             dataType: "json",
             success: function (result) {
-                alert(JSON.stringify(result));
+                //alert(JSON.stringify(result));
                 if (result.ret_code == 0) {
-                    alert("登录成功！");
+                    window.location.reload();
                 } else {
                     alert("登录失败");
                 }
