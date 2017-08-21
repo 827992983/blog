@@ -19,6 +19,7 @@ from common.password import check_password
 
 def index(request):
     try:
+        log_error("---------admin_index")
         if request.session.get('username'):
             log_error("======session[username]=%s" % request.session.get('username'))
             return render(request, 'static/admin/admin.html', {"username": request.session.get('username')})
@@ -32,8 +33,7 @@ def login(request):
         log_debug('in login---method:%s' % request.method)
         if request.session.get('username'):
             log_error("======session[username]=%s" % request.session.get('username'))
-            ret = return_success()
-            ret['data'] = {'username': request.session.get('username')}
+            ret = return_success(data={'username': request.session.get('username')})
             return HttpResponse(json.dumps(ret))
 
         if request.method == 'POST':
@@ -49,31 +49,31 @@ def login(request):
                 userinfo = User.objects.filter(username=username)
                 log_error("userinfo:%s" % userinfo)
                 if userinfo == None or len(userinfo) != 1:
-                    return render(request, 'static/admin/login.html')
+                    ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
+                                             ErrMsg.ERR_MSG_INTERNAL_ERROR))
+                    log_error("---ERR:%s" % ret)
+                    return HttpResponse(json.dumps(ret))
 
                 if check_password(password, userinfo[0].password):
                     log_error("---------password OK---session_key:%s" % str(request.session.session_key))
                     request.session.create()
                     request.session.save()
                     request.session['username'] = username
-                    #ret = return_success()
-                    #log_error("ret: %s" % ret)
-                    return render(request, 'static/admin/admin.html', {"username": username})
+                    ret = return_success(data={"username": username})
+                    return HttpResponse(json.dumps(ret))
                 else:
                     log_error("---------password ERROR")
                     ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
                                              ErrMsg.ERR_MSG_LOGIN_ERROR),
                                        dict(username=username, password=password))
 
-                response = HttpResponse(json.dumps(ret))
-                return response
-                return render()
+                    return HttpResponse(json.dumps(ret))
     except Exception,e:
         log_error('login with Exception:%s' % e)
         ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
                                  ErrMsg.ERR_MSG_INTERNAL_ERROR))
         log_error("ERR:%s" % ret)
-    return HttpResponse(json.dumps(ret))
+        return HttpResponse(json.dumps(ret))
 
 def logout(request):
     try:

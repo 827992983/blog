@@ -23,8 +23,11 @@ function login() {
             success: function (result) {
                 //alert(JSON.stringify(result));
                 if (result.ret_code == 0) {
-                    window.location.reload();
-                } else {
+                window.location = '/admin';
+                //window.location.reload();
+                    //
+                   // window.location.href = "${ctx}${url_kw}" + username;
+                }else{
                     alert("登录失败");
                 }
             },
