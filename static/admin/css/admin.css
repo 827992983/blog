@@ -1,0 +1,20 @@
+body {
+    background-color:#d0e4fe;
+}
+
+input {
+     width: 100px;
+}
+
+select {
+    width: 300px;
+}
+
+#addArticleTitle {
+    width: 300px;
+}
+
+#articleManagement {
+    height: 200px;
+    width: 100%
+}
