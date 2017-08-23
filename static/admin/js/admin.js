@@ -34,19 +34,19 @@ function load_page() {
                     var articleTypes = document.getElementById('addArticleType');
                     var i = 0;
                     for (i = 0; i < data.length; i++) {
-                        articleTypes.options.add(new Option(data[i].description,data[i].type_name));
+                        articleTypes.options.add(new Option(data[i].type_name,data[i].type_id));
                     }
 
                     i = 0;
                     articleTypes = document.getElementById('modifyArticleType');
                     for (i = 0; i < data.length; i++) {
-                        articleTypes.options.add(new Option(data[i].description,data[i].type_name));
+                        articleTypes.options.add(new Option(data[i].type_name,data[i].type_id));
                     }
 
                     i =0 ;
                     articleTypes = document.getElementById('deleteArticleType');
                     for (i = 0; i < data.length; i++) {
-                        articleTypes.options.add(new Option(data[i].description,data[i].type_name));
+                        articleTypes.options.add(new Option(data[i].type_name,data[i].type_id));
                     }
                 }else{
                     alert("登录失败");

@@ -100,7 +100,6 @@ def getArticleType(request):
                 arcType = {}
                 arcType['type_id'] = item.type_id
                 arcType['type_name'] = item.type_name
-                arcType['description'] = item.description
                 data.append(arcType)
             log_error('-----data: %s' % data)
             ret = return_success(data=data)

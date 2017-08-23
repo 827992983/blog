@@ -37,8 +37,7 @@ class Article(models.Model):
 
 class ArticleType(models.Model):
     type_id = models.CharField(max_length=128, primary_key=True)
-    type_name = models.CharField(max_length=64)
-    description = models.CharField(max_length=256, default='')
+    type_name = models.CharField(max_length=256, default='')
 
     def __unicode__(self):
         return self.type_id
