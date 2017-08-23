@@ -12,3 +12,4 @@ ERR_MSG_INTERNAL_ERROR = "internal error"
 ERR_MSG_SERVER_UPDAT = "server update"
 
 ERR_MSG_LOGIN_ERROR = "login error"
+ERR_MSG_USER_NOT_LOGIN_ERROR = "user is not login"

@@ -21,5 +21,11 @@ urlpatterns = [
     url(r'^login', admin_views.login, name='login'),
     url(r'^logout', admin_views.logout, name='logout'),
     url(r'^admin', admin_views.index, name='admin'),
+    url(r'^addArticle', admin_views.addArticle, name='addArticle'),
+    url(r'^modifyArticle', admin_views.modifyArticle, name='modifyArticle'),
+    url(r'^deleteArticle', admin_views.deleteArticle, name='deleteArticle'),
+    url(r'^getArticleContent', admin_views.getArticleContent, name='getArticleContent'),
+    url(r'^getArticleType', admin_views.getArticleType, name='getArticleType'),
+    url(r'^getArticleComment', admin_views.getArticleComment, name='getArticleComment'),
     url(r'^$', articles_views.index, name='home'),
 ]

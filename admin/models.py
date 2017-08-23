@@ -23,6 +23,7 @@ class User(models.Model):
 
 class Article(models.Model):
     article_id = models.CharField(max_length=128, primary_key=True)
+    title = models.CharField(max_length=256, default='')
     type_id =  models.CharField(max_length=128, default='')
     status = models.CharField(max_length=64)
     auther = models.CharField(max_length=64)
