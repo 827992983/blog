@@ -39,7 +39,7 @@ def login(request):
             return HttpResponse(json.dumps(ret))
 
         if request.method == 'POST':
-            log_debug(request.body)
+            log_debug('request body: %s' % request.body)
             form = json.loads(request.body)
 
             if form:
@@ -89,7 +89,6 @@ def getArticleType(request):
     try:
         if request.method == 'GET':
             articleTypes = ArticleType.objects.filter()
-            log_error("======articleTypes:%s" % articleTypes)
             if articleTypes == None:
                 ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
                                          ErrMsg.ERR_MSG_INTERNAL_ERROR))
@@ -101,7 +100,6 @@ def getArticleType(request):
                 arcType['type_id'] = item.type_id
                 arcType['type_name'] = item.type_name
                 data.append(arcType)
-            log_error('-----data: %s' % data)
             ret = return_success(data=data)
         else:
             ret = return_error(Error(ErrCode.ERR_CODE_INVALID_REQUEST_PARAM,
@@ -113,17 +111,45 @@ def getArticleType(request):
 
     return HttpResponse(json.dumps(ret))
 
-def getArticleComment(request):
+def getArticleTitles(request):
     try:
         if request.method == 'GET':
-            ArticleComments = ArticleComment.objects.filter()
-            log_error("======ArticleComments:%s" % ArticleComments)
-            if ArticleComments == None:
+            articleType = request.GET['type_id']
+            log_debug('request GET params: type_id:[%s]' % articleType)
+            articleTitles = Article.objects.filter(type_id=articleType)
+            if articleTitles == None:
                 ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
                                          ErrMsg.ERR_MSG_INTERNAL_ERROR))
                 return HttpResponse(json.dumps(ret))
 
-            ret = return_success(data=ArticleComments)
+            data = []
+            for item in articleTitles:
+                arcTitle = {}
+                arcTitle['article_id'] = item.article_id
+                arcTitle['title'] = item.title
+                data.append(arcTitle)
+            ret = return_success(data=data)
+        else:
+            ret = return_error(Error(ErrCode.ERR_CODE_INVALID_REQUEST_PARAM,
+                                     ErrMsg.ERR_MSG_INVALID_REQUEST_PARAM))
+    except Exception,e:
+        log_error('getArticleTitles with Exception:%s' % e)
+        ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
+                                 ErrMsg.ERR_MSG_INTERNAL_ERROR))
+
+    return HttpResponse(json.dumps(ret))
+
+def getArticleComment(request):
+    try:
+        if request.method == 'GET':
+            articleComments = ArticleComment.objects.filter()
+            log_error("======ArticleComments:%s" % articleComments)
+            if articleComments == None:
+                ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
+                                         ErrMsg.ERR_MSG_INTERNAL_ERROR))
+                return HttpResponse(json.dumps(ret))
+
+            ret = return_success(data=articleComments)
         else:
             ret = return_error(Error(ErrCode.ERR_CODE_INVALID_REQUEST_PARAM,
                                      ErrMsg.ERR_MSG_INVALID_REQUEST_PARAM))
@@ -138,15 +164,14 @@ def addArticle(request):
     try:
         log_debug('in addArticle---method:%s' % request.method)
         if not request.session.get('username', None):
-            log_error("======user not login")
+            log_error("user not login")
             ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
                                      ErrMsg.ERR_MSG_USER_NOT_LOGIN_ERROR))
             return HttpResponse(json.dumps(ret))
 
         if request.method == 'POST':
-            log_debug(request.body)
+            log_debug('request body: %s' % request.body)
             form = json.loads(request.body)
-            log_error("form:%s" % form)
 
             if form:
                 userinfo = User.objects.filter(username=form['auther'])
@@ -156,7 +181,7 @@ def addArticle(request):
                     log_error("---ERR:%s" % ret)
                     return HttpResponse(json.dumps(ret))
                 if userinfo[0].role == const.USER_ROLE_ADMIN:
-                    status = const.ATRICLE_STATUS_PUBLISH
+                    status = const.ATRICLE_STATUS_PUBLISHED
                 elif userinfo[0].role == const.USER_ROLE_NORMAL:
                     status = const.ATRICLE_STATUS_PREPARED
                 else:
@@ -164,7 +189,7 @@ def addArticle(request):
                                              ErrMsg.ERR_MSG_INVALID_REQUEST_PARAM))
                     return HttpResponse(json.dumps(ret))
 
-
+                log_debug('Article Body: %s' % form)
                 Article.objects.create(article_id = uuid.uuid1(), title = form['title'],
                                        type_id=form['type_id'], auther = form['auther'],
                                        status=status, htlm_context = form['htlm_context'])
@@ -175,17 +200,28 @@ def addArticle(request):
         log_error('addArticle with Exception:%s' % e)
         ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
                                  ErrMsg.ERR_MSG_INTERNAL_ERROR))
-        log_error("ERR:%s" % ret)
         return HttpResponse(json.dumps(ret))
 
 def getArticleContent(request):
     try:
         if request.method == 'GET':
-            log_error('------')
+            articleID = request.GET['article_id']
+            log_debug('request GET params: article_id:[%s]' % articleID)
+            article = Article.objects.filter(article_id=articleID)
+            if article == None:
+                ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
+                                         ErrMsg.ERR_MSG_INTERNAL_ERROR))
+                return HttpResponse(json.dumps(ret))
 
-        ret = return_success()
+            data = ''
+            if len(article) == 1:
+                data = article[0].htlm_context
+            ret = return_success(data=data)
+        else:
+            ret = return_error(Error(ErrCode.ERR_CODE_INVALID_REQUEST_PARAM,
+                                     ErrMsg.ERR_MSG_INVALID_REQUEST_PARAM))
     except Exception,e:
-        log_error('logout with Exception:%s' % e)
+        log_error('getArticleContent with Exception:%s' % e)
         ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
                                  ErrMsg.ERR_MSG_INTERNAL_ERROR))
 

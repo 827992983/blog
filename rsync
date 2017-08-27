@@ -1,1 +1,5 @@
-rsync -rtv ./* root@localhost:/var/www/blog
+rsync -rtv ./admin/* root@localhost:/var/www/blog/admin
+rsync -rtv ./blog/* root@localhost:/var/www/blog/blog
+rsync -rtv ./articles/* root@localhost:/var/www/blog/articles
+rsync -rtv ./common/* root@localhost:/var/www/blog/common
+rsync -rtv ./static/* root@localhost:/var/www/blog/static

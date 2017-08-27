@@ -28,6 +28,7 @@
     <hr>
     <div id="articleManagement">
         <form id="addArticleForm" class="" method="post" action="" >
+            {% csrf_token %}
             <label>文章标题：</label>
             <input id="addArticleTitle" name="title" type="text" class="" placeholder="文章标题">
             <label>文章分类：</label>
@@ -37,6 +38,7 @@
         </form>
         <hr>
         <form id="modifyArticleFrom" class="" method="post" action="" >
+            {% csrf_token %}
             <label>文章分类：</label>
             <select id="modifyArticleType" class="selectpicker" name="type">
             </select>
@@ -47,6 +49,7 @@
         </form>
         <hr>
         <form id="deleteArticleFrom" class="" method="post" action="" >
+            {% csrf_token %}
             <label>文章分类：</label>
             <select id="deleteArticleType" class="selectpicker" name="type">
             </select>
