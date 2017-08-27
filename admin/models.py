@@ -27,7 +27,7 @@ class Article(models.Model):
     type_id =  models.CharField(max_length=128, default='')
     status = models.CharField(max_length=64)
     auther = models.CharField(max_length=64)
-    htlm_context = models.TextField(default='')
+    html_context = models.TextField(default='')
     read_number = models.IntegerField(default=0)
     favorite_number = models.IntegerField(default=0)
     timestamp = models.DateTimeField(default=timezone.now)

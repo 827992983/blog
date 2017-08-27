@@ -45,18 +45,10 @@
             <label>文章标题：</label>
             <select id="modifyArticleTitle" class="selectpicker" name="type">
             </select>
-            <button id="modifyArticle" type="submit" class="">确认修改</button>
-        </form>
-        <hr>
-        <form id="deleteArticleFrom" class="" method="post" action="" >
-            {% csrf_token %}
-            <label>文章分类：</label>
-            <select id="deleteArticleType" class="selectpicker" name="type">
-            </select>
-            <label>文章标题：</label>
-            <select id="deleteArticleTitle" class="selectpicker" name="type">
-            </select>
-            <button id="deleteArticle" type="submit" class="">确认删除</button>
+            <label><input class="articleRadio" name="operation" type="radio" value="modify" checked="true" />修改</label>
+            <label><input class="articleRadio" name="operation" type="radio" value="delete" />删除</label>
+            <label></label>
+            <button id="modifyArticle" type="submit" class="">确认</button>
         </form>
     </div>
 

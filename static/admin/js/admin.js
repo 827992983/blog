@@ -10,28 +10,20 @@ var username = '';
 
 function admin_onload() {
     load_page();
-    /*
-    getArticleTitles('modify');
-    getArticleTitles('delete');
-    getArticle('modify');
-    getArticle('delete');
-    */
+    getArticleTitles();
+    getArticle();
 
     document.getElementById('addArticle').onclick = addArticle;
     document.getElementById('modifyArticle').onclick = modifyArticle;
-    document.getElementById('deleteArticle').onclick = deleteArticle;
 
     $("#modifyArticleType").change(function() {
-        getArticleTitles('modify');
-        getArticle('modify');
-    });
-    $("#deleteArticleType").change(function() {
-        getArticleTitles('delete');
-        getArticle('delete');
+        getArticleTitles();
+        getArticle();
     });
 
-    $("#modifyArticleTitle").change(function() { getArticle('modify'); });
-    $("#deleteArticleTitle").change(function() { getArticle('delete'); });
+    $("#modifyArticleTitle").change(function() { getArticle(); });
+
+    $("#addArticleTitle").focus(function(){ UE.getEditor('editor').setContent('', false); });
 
     document.getElementById('logout').onclick = logout;
 }
@@ -81,7 +73,7 @@ function addArticle() {
     data.title = document.getElementById('addArticleTitle').value;
     data.auther = username;
     data.type_id = $('#addArticleType option:selected').val();
-    data.htlm_context = UE.getEditor('editor').getContent();
+    data.html_context = UE.getEditor('editor').getContent();
 
     //alert(JSON.stringify(data));
     $.ajax({
@@ -104,16 +96,9 @@ function addArticle() {
     });
 }
 
-function getArticleTitles(module) {
+function getArticleTitles() {
     var url = '/getArticleTitles?type_id=';
-    if(module == 'modify'){
-        url = url + $('#modifyArticleType option:selected').val();
-    }else if(module == 'delete'){
-        url = url + $('#deleteArticleType option:selected').val();
-    }else{
-        alert('参数错误');
-        return 0;
-    }
+    url = url + $('#modifyArticleType option:selected').val();
 
     $.ajax({
             async: false,
@@ -125,16 +110,8 @@ function getArticleTitles(module) {
                 if (result.ret_code == 0) {
                     var data = result.data;
                     var selectObj = null;
-                    if (module == 'modify'){
-                        $("#modifyArticleTitle").empty();
-                        selectObj = document.getElementById('modifyArticleTitle');
-                    }else if(module == 'delete'){
-                        $("#deleteArticleTitle").empty();
-                        selectObj = document.getElementById('deleteArticleTitle');
-                    }else{
-                        alert('参数错误');
-                        return 0;
-                    }
+                    $("#modifyArticleTitle").empty();
+                    selectObj = document.getElementById('modifyArticleTitle');
 
                     var i = 0;
                     for (i = 0; i < data.length; i++) {
@@ -150,16 +127,9 @@ function getArticleTitles(module) {
     });
 }
 
-function getArticle(module) {
+function getArticle() {
     var url = '/getArticleContent?article_id=';
-    if(module == 'modify'){
-        url = url + $('#modifyArticleTitle option:selected').val();
-    }else if(module == 'delete'){
-        url = url + $('#deleteArticleTitle option:selected').val();
-    }else{
-        alert('参数错误');
-        return 0;
-    }
+    url = url + $('#modifyArticleTitle option:selected').val();
 
     //alert(url);
     $.ajax({
@@ -182,18 +152,24 @@ function getArticle(module) {
 }
 
 function modifyArticle() {
+    var data = new Object();
+    data.article_id = $('#modifyArticleTitle option:selected').val();
+    data.operation = $("input[type='radio']:checked").val();
+    data.html_context = UE.getEditor('editor').getContent();
 
+    alert(JSON.stringify(data));
     $.ajax({
             async: false,
-            url: 'modifyArticle',
+            url: '/modifyArticle',
             method: 'post',
+            data: JSON.stringify(data),
             dataType: 'json',
             success: function (result) {
                 alert(JSON.stringify(result));
                 if (result.ret_code == 0) {
                     //window.location = '/admin';
                 }else{
-                    alert("登录失败");
+                    alert("添加文章失败");
                 }
             },
             beforeSend: function (xhr) {

@@ -6,6 +6,13 @@ input {
      width: 100px;
 }
 
+.articleRadio {
+    vertical-align: text-bottom;
+    width: 20px;
+    margin-bottom: 2px;
+    margin-bottom: -2px\9;
+}
+
 select {
     width: 300px;
 }
@@ -15,6 +22,6 @@ select {
 }
 
 #articleManagement {
-    height: 200px;
+    height: 120px;
     width: 100%
 }
