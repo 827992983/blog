@@ -21,7 +21,7 @@ function addCommentContext() {
             success: function (result) {
                 //alert(JSON.stringify(result));
                 if (result.ret_code == 0) {
-                    //window.location = '/admin';
+                     window.location.reload(true);
                 }else{
                     alert("添加评论失败");
                 }

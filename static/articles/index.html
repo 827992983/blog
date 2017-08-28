@@ -134,11 +134,11 @@
 					<h2><a id="article_title", href="/article/{{ article.article_id }}">{{ article.title }}</a></h2>
 					<p>{{ article.html_context|truncatechars_html:80 | safe }}</p>
 				 	<!-- <p><button class="btn btn-default">阅读全文</button></p> -->
-					<p class="pull-right"><span class="label label-default">{{ article.column }}</span> <span class="label label-default">tag</span> <span class="label label-default">{{ article.author }}</span></p>
+					<p class="pull-right"><span class="label label-default">{{ article.column }}</span> <span class="label label-default"></span> <span class="label label-default">作者：{{ article.author }}</span></p>
 					<ul class="list-inline">
-						<li><a href="#">{{ article.timestamp | date:"j M" }}</a></li>
-						<li><a href="#"><span class="glyphicon glyphicon-comment"></span> {{ article.read_number }} Readers</a></li>
-						<li><a href="#"><span class="glyphicon glyphicon-thumbs-up"></span>{{ article.favorite_number }} Favorites</a></li>
+						<li>{{ article.timestamp | date:"F j, Y" }}</li>
+						<li><span class="glyphicon glyphicon-comment"></span> {{ article.read_number }} 阅读</li>
+						<li><span class="glyphicon glyphicon-thumbs-up"></span>{{ article.favorite_number }} 赞</li>
 					</ul>
 				</article>
 			</div>

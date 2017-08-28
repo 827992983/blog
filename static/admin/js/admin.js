@@ -71,7 +71,7 @@ function load_page() {
 function addArticle() {
     var data = new Object();
     data.title = document.getElementById('addArticleTitle').value;
-    data.auther = username;
+    data.author = username;
     data.type_id = $('#addArticleType option:selected').val();
     data.html_context = UE.getEditor('editor').getContent();
 

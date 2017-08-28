@@ -90,13 +90,13 @@
 			<div class="row">
 				<article class="col-xs-12">
 					<h2>{{ article.title }}</h2>
-					<p class="pull-right"><span class="label label-default">{{ article.read_number }}</span> <span class="label label-default">{{ article.timestamp | date:"j M" }}</span> <span class="label label-default">{{ article.author }}</span></p>
+					<p class="pull-right"><span class="label label-default">{{ article.read_number }}</span> <span class="label label-default">{{ article.timestamp | date:"F j, Y" }}</span> <span class="label label-default">作者：{{ article.author }}</span></p>
 					<p><hr></p>
 					<p>{{ article.html_context | safe }}</p>
 					<p></p>
 					<ul class="list-inline">
-						<li><span class="glyphicon glyphicon-comment"></span> {{ article.comment_number }} Comments</li>
-						<li><span class="glyphicon glyphicon-thumbs-up"></span>{{ article.favorite_number }} Favorites</li>
+						<li><span class="glyphicon glyphicon-comment"></span> {{ article.comment_number }} 评论</li>
+						<li><a href="#"><span class="glyphicon glyphicon-thumbs-up"></span>{{ article.favorite_number }} 赞</a></li>
 						<!-- <li><a href="/focus/{{ article.id }}/poll/"><span class="glyphicon glyphicon-thumbs-up"></span>{{ article.poll_num }} Upvotes</a></li> -->
 					</ul>
 				</article>
@@ -111,11 +111,11 @@
 				
 				<article class="col-xs-12">
 
-					<p class="pull-right"> <span class="label label-default">tag</span> <span class="label label-default">{{ comment.comment_id }}</span></p>
+					<p class="pull-right"> <span class="label label-default"></span> <span class="label label-default">{{ comment.comment_id }}</span></p>
 
 					<p>{{ comment.context }}</p>
 					<ul class="list-inline">
-						<li><a href=" ">{{ comment.timestamp | date:"j M" }}</a></li>
+						<li><small>{{ comment.timestamp | date:"F j, Y" }}</small></li>
 					</ul>
 				</article>
 			</div>			

@@ -152,7 +152,7 @@ def addArticle(request):
             form = json.loads(request.body)
 
             if form:
-                userinfo = User.objects.filter(username=form['auther'])
+                userinfo = User.objects.filter(username=form['author'])
                 if userinfo == None or len(userinfo) != 1:
                     ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
                                              ErrMsg.ERR_MSG_INTERNAL_ERROR))
@@ -167,7 +167,7 @@ def addArticle(request):
                     return HttpResponse(json.dumps(ret))
 
                 Article.objects.create(article_id = uuid.uuid1(), title = form['title'],
-                                       type_id=form['type_id'], auther = form['auther'],
+                                       type_id=form['type_id'], author = form['author'],
                                        status=status, html_context = form['html_context'])
 
                 ret = return_success()

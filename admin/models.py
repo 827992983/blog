@@ -26,7 +26,7 @@ class Article(models.Model):
     title = models.CharField(max_length=256, default='')
     type_id =  models.CharField(max_length=128, default='')
     status = models.CharField(max_length=64)
-    auther = models.CharField(max_length=64)
+    author = models.CharField(max_length=64)
     html_context = models.TextField(default='')
     read_number = models.IntegerField(default=0)
     favorite_number = models.IntegerField(default=0)

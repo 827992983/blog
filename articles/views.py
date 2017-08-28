@@ -44,7 +44,7 @@ def article(request):
             data['article_id'] = articles[0].article_id
             data['title'] = articles[0].title
             data['type_id'] = articles[0].type_id
-            data['auther'] = articles[0].auther
+            data['author'] = articles[0].author
             data['html_context'] = articles[0].html_context
             data['read_number'] = articles[0].read_number
             data['favorite_number'] = articles[0].favorite_number
