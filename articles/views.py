@@ -29,7 +29,6 @@ def article(request):
             log_debug('request GET URI:[%s], article_id:[%s]' % (uri, article_id))
 
             articles = Article.objects.filter(article_id=article_id, status=const.ATRICLE_STATUS_PUBLISHED)
-            log_error("=====articles: %s" % articles)
             if articles == None:
                 ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
                                          ErrMsg.ERR_MSG_INTERNAL_ERROR))
@@ -51,7 +50,6 @@ def article(request):
             data['timestamp'] = articles[0].timestamp
 
             articleComments = ArticleComment.objects.filter(article_id=article_id)
-            log_error("=====articles:[%s]" % (articleComments))
             data['comment_number'] = len(articleComments)
 
             ret={'article': data}
@@ -65,7 +63,6 @@ def article(request):
                     data.append(comment)
             ret['comments'] = data
 
-            log_error("=====ret: %s" % ret)
             return render(request, 'static/articles/article.html', ret)
         else:
             ret = return_error(Error(ErrCode.ERR_CODE_INVALID_REQUEST_PARAM,
@@ -79,14 +76,12 @@ def article(request):
 
 def addComment(request):
     try:
-        log_error("-----------------------------")
         if request.method == 'POST':
-            log_debug('-=-=-=-=request body: %s' % request.body)
+            log_debug('request body: %s' % request.body)
             form = json.loads(request.body)
 
             if form:
                 articles = Article.objects.filter(article_id=form['article_id'])
-                log_error("-0=0=0=articles:%s" % articles)
                 if articles == None or len(articles) != 1:
                     ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
                                              ErrMsg.ERR_MSG_INTERNAL_ERROR))
@@ -104,6 +99,76 @@ def addComment(request):
                                      ErrMsg.ERR_MSG_INVALID_REQUEST_PARAM))
     except Exception,e:
         log_error('addComment with Exception:%s' % e)
+        ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
+                                 ErrMsg.ERR_MSG_INTERNAL_ERROR))
+
+    return HttpResponse(json.dumps(ret))
+
+def addFavoriteNumber(request):
+    try:
+        if request.method == 'GET':
+            uri = request.path
+            paths = uri.split('/')
+            article_id = paths[-1]
+            log_debug('request GET URI:[%s], article_id:[%s]' % (uri, article_id))
+
+            articles = Article.objects.filter(article_id=article_id, status=const.ATRICLE_STATUS_PUBLISHED)
+            if articles == None:
+                ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
+                                         ErrMsg.ERR_MSG_INTERNAL_ERROR))
+                return HttpResponse(json.dumps(ret))
+
+            if articles == None or len(articles) != 1:
+                ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
+                                         ErrMsg.ERR_MSG_INTERNAL_ERROR))
+                return HttpResponse(json.dumps(ret))
+            else:
+                ret = return_error(Error(ErrCode.ERR_CODE_INVALID_REQUEST_PARAM,
+                                         ErrMsg.ERR_MSG_INVALID_REQUEST_PARAM))
+            favorite_number = articles[0].favorite_number
+            favorite_number = favorite_number + 1
+            Article.objects.filter(article_id=article_id).update(favorite_number=favorite_number)
+            ret = return_success()
+        else:
+            ret = return_error(Error(ErrCode.ERR_CODE_INVALID_REQUEST_PARAM,
+                                     ErrMsg.ERR_MSG_INVALID_REQUEST_PARAM))
+    except Exception,e:
+        log_error('addFavoriteNumber with Exception:%s' % e)
+        ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
+                                 ErrMsg.ERR_MSG_INTERNAL_ERROR))
+
+    return HttpResponse(json.dumps(ret))
+
+def addReadNumber(request):
+    try:
+        if request.method == 'GET':
+            uri = request.path
+            paths = uri.split('/')
+            article_id = paths[-1]
+            log_debug('request GET URI:[%s], article_id:[%s]' % (uri, article_id))
+
+            articles = Article.objects.filter(article_id=article_id, status=const.ATRICLE_STATUS_PUBLISHED)
+            if articles == None:
+                ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
+                                         ErrMsg.ERR_MSG_INTERNAL_ERROR))
+                return HttpResponse(json.dumps(ret))
+
+            if articles == None or len(articles) != 1:
+                ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
+                                         ErrMsg.ERR_MSG_INTERNAL_ERROR))
+                return HttpResponse(json.dumps(ret))
+            else:
+                ret = return_error(Error(ErrCode.ERR_CODE_INVALID_REQUEST_PARAM,
+                                         ErrMsg.ERR_MSG_INVALID_REQUEST_PARAM))
+            read_number = articles[0].read_number
+            read_number = read_number + 1
+            Article.objects.filter(article_id=article_id).update(read_number=read_number)
+            ret = return_success()
+        else:
+            ret = return_error(Error(ErrCode.ERR_CODE_INVALID_REQUEST_PARAM,
+                                     ErrMsg.ERR_MSG_INVALID_REQUEST_PARAM))
+    except Exception,e:
+        log_error('addReadNumber with Exception:%s' % e)
         ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
                                  ErrMsg.ERR_MSG_INTERNAL_ERROR))
 

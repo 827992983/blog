@@ -1,7 +1,30 @@
 window.onload = admin_onload;
 
 function admin_onload() {
+    load_page();
+
     document.getElementById('submitCommentContext').onclick = addCommentContext;
+    document.getElementById('addFavoriteNumber').onclick = addFavoriteNumber;
+}
+
+function load_page() {
+    var baseUri = window.location.pathname
+    var start = baseUri.lastIndexOf("\/");
+    var uri = 'addReadNumber/';
+    uri = uri + baseUri.substring(start+1, baseUri.length);
+    //alert(uri);
+    $.ajax({
+            async: false,
+            url: uri,
+            method: 'get',
+            dataType: 'json',
+            success: function (result) {
+                //alert(JSON.stringify(result));
+            },
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRFToken', getCookie("csrftoken"));
+            }
+    });
 }
 
 function addCommentContext() {
@@ -30,4 +53,26 @@ function addCommentContext() {
                 xhr.setRequestHeader('X-CSRFToken', getCookie("csrftoken"));
             }
     });
+}
+
+function addFavoriteNumber() {
+    var baseUri = window.location.pathname
+    var start = baseUri.lastIndexOf("\/");
+    var uri = 'addFavoriteNumber/';
+    uri = uri + baseUri.substring(start+1, baseUri.length);
+    //alert(uri);
+    $.ajax({
+            async: false,
+            url: uri,
+            method: 'get',
+            dataType: 'json',
+            success: function (result) {
+                //alert(JSON.stringify(result));
+                return false;
+            },
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRFToken', getCookie("csrftoken"));
+            }
+    });
+    self.location.reload(true);
 }

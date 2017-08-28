@@ -27,6 +27,8 @@ urlpatterns = [
     url(r'^getArticleContent', admin_views.getArticleContent, name='getArticleContent'),
     url(r'^getArticleType', admin_views.getArticleType, name='getArticleType'),
     url(r'^article/addComment', articles_views.addComment, name='addComment'),
+    url(r'^article/addFavoriteNumber', articles_views.addFavoriteNumber, name='addFavoriteNumber'),
+    url(r'^article/addReadNumber', articles_views.addReadNumber, name='addReadNumber'),
     url(r'^article', articles_views.article, name='article'),
     url(r'^$', articles_views.index, name='home'),
 ]
