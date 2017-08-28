@@ -14,7 +14,7 @@ import common.constants as const
 
 def index(request):
     latest_article_list = Article.objects.filter().order_by("-timestamp")[0:5]
-    popular_article_list = Article.objects.filter().order_by("read_number")[0:5]
+    popular_article_list = Article.objects.filter().order_by("-read_number")[0:5]
     context = {'latest_article_list': latest_article_list,
                'popular_article_list': popular_article_list,}
     return render(request, 'static/articles/index.html', context)

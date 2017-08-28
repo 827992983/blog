@@ -169,7 +169,7 @@ def addArticle(request):
                     return HttpResponse(json.dumps(ret))
 
                 Article.objects.create(article_id = uuid.uuid1(), title = form['title'],
-                                       type_id=form['type_id'], author = form['author'],
+                                       type_id=form['type_id'], author = userinfo[0].real_name,
                                        status=status, html_context = form['html_context'])
 
                 ret = return_success()
