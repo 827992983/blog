@@ -4,7 +4,7 @@
 #date: 2017
 #Copyright: free
 
-LOG_FILE_PATH = "/tmp/blog/blog.log"
+LOG_FILE_PATH = "/var/log/blog.log"
 
 ATRICLE_STATUS_PUBLISHED = "published"
 ATRICLE_STATUS_PREPARED = "prepared"

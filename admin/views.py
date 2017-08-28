@@ -52,7 +52,9 @@ def login(request):
                                              ErrMsg.ERR_MSG_INTERNAL_ERROR))
                     return HttpResponse(json.dumps(ret))
 
-                if check_password(password, userinfo[0].password):
+                db_password = str(userinfo[0].password)
+                password = str(password)
+                if check_password(password, db_password):
                     request.session.create()
                     request.session.save()
                     request.session['username'] = username
