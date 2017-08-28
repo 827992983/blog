@@ -157,7 +157,7 @@ function modifyArticle() {
     data.operation = $("input[type='radio']:checked").val();
     data.html_context = UE.getEditor('editor').getContent();
 
-    alert(JSON.stringify(data));
+    //alert(JSON.stringify(data));
     $.ajax({
             async: false,
             url: '/modifyArticle',
@@ -165,7 +165,7 @@ function modifyArticle() {
             data: JSON.stringify(data),
             dataType: 'json',
             success: function (result) {
-                alert(JSON.stringify(result));
+                //alert(JSON.stringify(result));
                 if (result.ret_code == 0) {
                     //window.location = '/admin';
                 }else{

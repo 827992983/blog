@@ -8,8 +8,8 @@
 	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css"/>
 
     <script type="text/javascript" src="/static/js/jquery-2.1.1.js"></script>
-	<script src="/static/js/holder.min.js"></script>
-	<script src="/static/js/bootstrap.js"></script>
+	<script type="text/javascript" src="/static/js/holder.min.js"></script>
+	<script type="text/javascript" src="/static/js/bootstrap.js"></script>
 
     <title>Yue开源兴趣小组-Blog</title>
 
@@ -34,12 +34,14 @@
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="#">Home</a>
+                        <a href="/">Home</a>
                     </li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Yue社区项目 <span class="caret"></span></a>
 						<ul class="dropdown-menu" aria-labelledby="about-us">
+							<li><a href="#">基础编程公共库</a></li>
 							<li><a href="#">Yue虚拟化平台</a></li>
+							<li><a href="#">Yue个人博客建站</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
@@ -89,11 +91,9 @@
 					<h1 class="panel-title"><span class="glyphicon glyphicon-fire"></span> 热门文章 </h1>
 				</div>
 				<div class="list-group">
-					<a href="#" class="list-group-item">django高级应用</a>
-					<a href="#" class="list-group-item">jquery用法总结</a>
-					<a href="#" class="list-group-item">KVM深入详解</a>
-					<a href="#" class="list-group-item">编译防火墙——C++的Pimpl惯用法解析</a>
-					<a href="#" class="list-group-item">IP选路</a>
+					{% for article in popular_article_list %}
+					<a href="/article/{{ article.article_id }}" class="list-group-item">{{ article.title }}</a>
+					{% endfor %}
 				</div>
 			</div>
 
@@ -128,20 +128,22 @@
 		<!-- Center Column -->
 		<div class="col-sm-6">		
 			<!-- Articles -->
+			{% for article in latest_article_list %}
 			<div class="row">
 				<article class="col-xs-12">
-					<h2>Premier Niche Markets</h2>
-					<p>Phosfluorescently engage worldwide methodologies with web-enabled technology. Interactively coordinate proactive e-commerce via process-centric "outside the box" thinking. Completely pursue scalable customer service through sustainable potentialities.</p>
-					<p><button class="btn btn-default">阅读全文</button></p>
-					<p class="pull-right"><span class="label label-default">keyword</span> <span class="label label-default">tag</span> <span class="label label-default">post</span></p>
+					<h2><a id="article_title", href="/article/{{ article.article_id }}">{{ article.title }}</a></h2>
+					<p>{{ article.html_context|truncatechars_html:80 | safe }}</p>
+				 	<!-- <p><button class="btn btn-default">阅读全文</button></p> -->
+					<p class="pull-right"><span class="label label-default">{{ article.column }}</span> <span class="label label-default">tag</span> <span class="label label-default">{{ article.author }}</span></p>
 					<ul class="list-inline">
-						<li><a href="#">Today</a></li>
-						<li><a href="#"><span class="glyphicon glyphicon-comment"></span> 2 Comments</a></li>
-						<li><a href="#"><span class="glyphicon glyphicon-star-empty"></span> 8 favorites</a></li>
+						<li><a href="#">{{ article.timestamp | date:"j M" }}</a></li>
+						<li><a href="#"><span class="glyphicon glyphicon-comment"></span> {{ article.read_number }} Readers</a></li>
+						<li><a href="#"><span class="glyphicon glyphicon-thumbs-up"></span>{{ article.favorite_number }} Favorites</a></li>
 					</ul>
 				</article>
 			</div>
 			<hr>
+			{% endfor %}
 		</div><!--/Center Column-->
 
 
@@ -262,7 +264,7 @@
 						<p>收费明细（RMB）： </p>
 						<p>动态广告：20元/月 或 200元/年 </p>
 						<p>链接广告：30元/月 或 300元/年</p>
-						<p>费用声明：用于租赁服务器，租赁带宽，租赁域名等</p>
+						<p>费用声明：所得资金用于租赁服务器，租赁带宽，租赁域名等</p>
 						<!-- <p><a class="btn btn-default" href="#">Unleash</a></p> -->
 					</div>
 					<div class="col-sm-3 footer-blurb-item">
