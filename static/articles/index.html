@@ -28,7 +28,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-adjust"></span> Yue</a>
+                <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-adjust"></span> Yue</a>
             </div>
             <!-- Navbar links -->
             <div class="collapse navbar-collapse" id="navbar">
@@ -114,11 +114,9 @@
 					<h1 class="panel-title"><span class="glyphicon glyphicon-save"></span> 资料下载 </h1>
 				</div>
 				<div class="list-group">
-					<a href="#" class="list-group-item">django高级应用</a>
-					<a href="#" class="list-group-item">jquery用法总结</a>
-					<a href="#" class="list-group-item">KVM深入详解</a>
-					<a href="#" class="list-group-item">编译防火墙——C++的Pimpl惯用法解析</a>
-					<a href="#" class="list-group-item">IP选路</a>
+					<a href="http://pan.baidu.com/s/1eRYPlN8" class="list-group-item">C语言数据结构源码</a>
+					<a href="http://pan.baidu.com/s/1slRrv7R" class="list-group-item">Linux C语言常用库</a>
+					<a href="http://pan.baidu.com/s/1ge2YWYv" class="list-group-item">vim 插件开发工具</a>
 				</div>
 			</div>	
 				
@@ -131,7 +129,7 @@
 			{% for article in latest_article_list %}
 			<div class="row">
 				<article class="col-xs-12">
-					<h2><a id="article_title", href="/article/{{ article.article_id }}">{{ article.title }}</a></h2>
+					<h3><a id="article_title", href="/article/{{ article.article_id }}">{{ article.title }}</a></h3>
 					<p>{{ article.html_context|truncatechars_html:80 | safe }}</p>
 				 	<!-- <p><button class="btn btn-default">阅读全文</button></p> -->
 					<p class="pull-right"><span class="label label-default">{{ article.column }}</span> <span class="label label-default"></span> <span class="label label-default">作者：{{ article.author }}</span></p>
