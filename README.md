@@ -29,8 +29,10 @@ git clone https://github.com/827992983/blog.git
 </VirtualHost>
 ```
 4. init sqlite3 database
-
-  edit initdb.py and modify init username and password.
+```
+edit initdb.py and modify init username and password.
+```
+run:
 ```
 python manage.py shell
 import initdb
