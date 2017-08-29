@@ -3,7 +3,9 @@
 >You can deploy it on apache or nginx.
 ### Install
 1. clone source to a Linux machine.
-
+```
+git clone https://github.com/827992983/blog.git
+```
 2. install apache and python-django runtime environment.
 
 3. configure apache 
