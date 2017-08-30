@@ -45,7 +45,9 @@ function addCommentContext() {
                 //alert(JSON.stringify(result));
                 if (result.ret_code == 0) {
                      window.location.reload(true);
-                }else{
+                }else if (result.ret_code == 10000){
+                    alert("文章评论数超过最大限制");
+                }else {
                     alert("添加评论失败");
                 }
             },

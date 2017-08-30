@@ -81,6 +81,12 @@ def addComment(request):
             form = json.loads(request.body)
 
             if form:
+                articleComments = ArticleComment.objects.filter(article_id=form['article_id'])
+                if len(articleComments) > const.LIMIT_ARTICLE_COMMENT_NUMBER:
+                    ret = return_error(Error(ErrCode.ERR_CODE_ARTICLE_COMMENT_MAX_NUMBER,
+                                             ErrMsg.ERR_MSG_ARTICLE_COMMENT_MAX_NUMBER))
+                    return HttpResponse(json.dumps(ret))
+
                 articles = Article.objects.filter(article_id=form['article_id'])
                 if articles == None or len(articles) != 1:
                     ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
