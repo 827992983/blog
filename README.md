@@ -2,7 +2,7 @@
 >This is a opensource blog publishing and management platform with pthon-django-1.8.18. It support PC and mobile devices. 
 >You can deploy it on apache or nginx.
 ### Install
-1. clone source to a Linux machine.
+1. clone project
 ```
 git clone https://github.com/827992983/blog.git
 ```
@@ -41,4 +41,10 @@ import initdb
 ```
 blog home： http://xxx.xxx.xxx.xxx:port/
 blog management: http://xxx.xxx.xxx.xxx:port/admin
+```
+### contact:
+```
+author: Abel Lee 
+QQ: 827992983 
+Email: 827992983@qq.com
 ```
