@@ -47,22 +47,22 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">开源项目学习 <span class="caret"></span></a>
 						<ul class="dropdown-menu" aria-labelledby="about-us">
-							<li><a href="#">openstack</a></li>
-							<li><a href="#">Spice VDI</a></li>
+							<li><a id="OpenStack" href="/article/type/{{ openstack.type_id }}">{{ openstack.type_name }}</a></li>
+							<li><a id="SpiceVDI" href="/article/type/{{ vdi.type_id }}">{{ vdi.type_name }}</a></li>
 						</ul>
 					</li>
                     <li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程语言 <span class="caret"></span></a>
 						<ul class="dropdown-menu" aria-labelledby="about-us">
-							<li><a href="#">C/C++</a></li>
-							<li><a href="#">Python</a></li>
-							<li><a href="#">Java</a></li>
-							<li><a href="#">Web前端</a></li>
-							<li><a href="#">数据结构与算法</a></li>
+							<li><a id="CPP" href="/article/type/{{ cpp.type_id }}">{{ cpp.type_name }}</a></li>
+							<li><a id="Python" href="/article/type/{{ python.type_id }}">{{ python.type_name }}</a></li>
+							<li><a id="Java" href="/article/type/{{ java.type_id }}">{{ java.type_name }}</a></li>
+							<li><a id="Web" href="/article/type/{{ web.type_id }}">{{ web.type_name }}</a></li>
+							<li><a id="Arithmetic" href="/article/type/{{ arithmetic.type_id }}">{{ arithmetic.type_name }}</a></li>
 						</ul>
 					</li>
                     <li>
-                        <a href="#">Linux/Windows系统</a>
+                        <a id="OS" href="/article/type/{{ os.type_id }}">{{ os.type_name }}</a>
                     </li>
                 </ul>
 

@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^article/addComment', articles_views.addComment, name='addComment'),
     url(r'^article/addFavoriteNumber', articles_views.addFavoriteNumber, name='addFavoriteNumber'),
     url(r'^article/addReadNumber', articles_views.addReadNumber, name='addReadNumber'),
+    url(r'^article/type', articles_views.indexArticleType, name='indexArticleType'),
     url(r'^article', articles_views.article, name='article'),
     url(r'^$', articles_views.index, name='home'),
 ]
