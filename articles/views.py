@@ -23,11 +23,21 @@ def index(request):
         context[item.alias] = {'type_id':item.type_id, 'type_name':item.type_name}
     return render(request, 'static/articles/index.html', context)
 
+def search(request):
+    keywords = request.GET['keywords']
+    latest_article_list = Article.objects.filter(title__contains=keywords).order_by("-timestamp")[0:5]
+    popular_article_list = Article.objects.filter(title__contains=keywords).order_by("-read_number")[0:5]
+    context = {'latest_article_list': latest_article_list,
+               'popular_article_list': popular_article_list,}
+    articleTypes = ArticleType.objects.filter()
+    for item in articleTypes:
+        context[item.alias] = {'type_id':item.type_id, 'type_name':item.type_name}
+    return render(request, 'static/articles/index.html', context)
+
 def indexArticleType(request):
     uri = request.path
     paths = uri.split('/')
     type_id = paths[-1]
-    log_debug('request GET URI:[%s], article_id:[%s]' % (uri, type_id))
     latest_article_list = Article.objects.filter(type_id=type_id).order_by("-timestamp")[0:5]
     popular_article_list = Article.objects.filter(type_id=type_id).order_by("-read_number")[0:5]
     context = {'latest_article_list': latest_article_list,

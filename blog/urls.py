@@ -31,5 +31,6 @@ urlpatterns = [
     url(r'^article/addReadNumber', articles_views.addReadNumber, name='addReadNumber'),
     url(r'^article/type', articles_views.indexArticleType, name='indexArticleType'),
     url(r'^article', articles_views.article, name='article'),
+    url(r'^search', articles_views.search, name='search'),
     url(r'^$', articles_views.index, name='home'),
 ]
