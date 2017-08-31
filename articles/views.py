@@ -90,6 +90,10 @@ def article(request):
                     data.append(comment)
             ret['comments'] = data
 
+            articleTypes = ArticleType.objects.filter()
+            for item in articleTypes:
+                ret[item.alias] = {'type_id': item.type_id, 'type_name': item.type_name}
+
             return render(request, 'static/articles/article.html', ret)
         else:
             ret = return_error(Error(ErrCode.ERR_CODE_INVALID_REQUEST_PARAM,

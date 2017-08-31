@@ -42,37 +42,45 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Yue社区项目 <span class="caret"></span></a>
 						<ul class="dropdown-menu" aria-labelledby="about-us">
-							<li><a href="#">基础编程公共库</a></li>
-							<li><a href="#">Yue虚拟化平台</a></li>
-							<li><a href="#">Yue个人博客建站</a></li>
+							<li><a href="https://github.com/827992983/mylib">基础编程公共库</a></li>
+							<li><a href="https://github.com/827992983/yue">Yue虚拟化平台</a></li>
+							<li><a href="https://github.com/827992983/blog">Yue个人博客建站</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">开源项目学习 <span class="caret"></span></a>
 						<ul class="dropdown-menu" aria-labelledby="about-us">
-							<li><a href="#">openstack</a></li>
-							<li><a href="#">Spice VDI</a></li>
+							<li><a id="OpenStack" href="/article/type/{{ openstack.type_id }}">{{ openstack.type_name }}</a></li>
+							<li><a id="SpiceVDI" href="/article/type/{{ vdi.type_id }}">{{ vdi.type_name }}</a></li>
 						</ul>
 					</li>
                     <li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编程语言 <span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">基础编程 <span class="caret"></span></a>
 						<ul class="dropdown-menu" aria-labelledby="about-us">
-							<li><a href="#">C/C++</a></li>
-							<li><a href="#">Python</a></li>
-							<li><a href="#">Java</a></li>
-							<li><a href="#">Web前端</a></li>
-							<li><a href="#">数据结构与算法</a></li>
+							<li><a id="CPP" href="/article/type/{{ cpp.type_id }}">{{ cpp.type_name }}</a></li>
+							<li><a id="Python" href="/article/type/{{ python.type_id }}">{{ python.type_name }}</a></li>
+							<!--<li><a id="Java" href="/article/type/{{ java.type_id }}">{{ java.type_name }}</a></li>-->
+							<li><a id="Web" href="/article/type/{{ web.type_id }}">{{ web.type_name }}</a></li>
+							<li><a id="Arithmetic" href="/article/type/{{ arithmetic.type_id }}">{{ arithmetic.type_name }}</a></li>
+							<li><a id="OS" href="/article/type/{{ os.type_id }}">{{ os.type_name }}</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">系统架构 <span class="caret"></span></a>
+						<ul class="dropdown-menu" aria-labelledby="about-us">
+							<li><a id="Architecture" href="/article/type/{{ architecture.type_id }}">{{ architecture.type_name }}</a></li>
+							<li><a id="ArchitectureCase" href="/article/type/{{ architecturecase.type_id }}">{{ architecturecase.type_name }}</a></li>
 						</ul>
 					</li>
                     <li>
-                        <a href="#">Linux/Windows系统</a>
+                        <a id="ReadingNote" href="/article/type/{{ readingnote.type_id }}">{{ readingnote.type_name }}</a>
                     </li>
                 </ul>
 
 				<!-- Search -->
-				<form class="navbar-form navbar-right" role="search">
+				<form class="navbar-form navbar-right" role="search" action="/search">
 					<div class="form-group">
-						<input type="text" class="form-control">
+						<input type="text" id="keywords" name="keywords" class="form-control">
 					</div>
 					<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Search</button>
 				</form>
