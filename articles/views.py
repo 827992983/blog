@@ -53,8 +53,7 @@ def article(request):
             uri = request.path
             paths = uri.split('/')
             article_id = paths[-1]
-            #article_id = request.GET['article_id']
-            log_debug('request GET URI:[%s], article_id:[%s]' % (uri, article_id))
+            #log_debug('request GET URI:[%s], article_id:[%s]' % (uri, article_id))
 
             articles = Article.objects.filter(article_id=article_id, status=const.ATRICLE_STATUS_PUBLISHED)
             if articles == None:
@@ -105,7 +104,7 @@ def article(request):
 def addComment(request):
     try:
         if request.method == 'POST':
-            log_debug('request body: %s' % request.body)
+            #log_debug('request body: %s' % request.body)
             form = json.loads(request.body)
 
             if form:
@@ -144,7 +143,7 @@ def addFavoriteNumber(request):
             uri = request.path
             paths = uri.split('/')
             article_id = paths[-1]
-            log_debug('request GET URI:[%s], article_id:[%s]' % (uri, article_id))
+            #log_debug('request GET URI:[%s], article_id:[%s]' % (uri, article_id))
 
             articles = Article.objects.filter(article_id=article_id, status=const.ATRICLE_STATUS_PUBLISHED)
             if articles == None:
@@ -179,7 +178,7 @@ def addReadNumber(request):
             uri = request.path
             paths = uri.split('/')
             article_id = paths[-1]
-            log_debug('request GET URI:[%s], article_id:[%s]' % (uri, article_id))
+            #log_debug('request GET URI:[%s], article_id:[%s]' % (uri, article_id))
 
             articles = Article.objects.filter(article_id=article_id, status=const.ATRICLE_STATUS_PUBLISHED)
             if articles == None:

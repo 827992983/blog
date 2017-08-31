@@ -39,7 +39,7 @@ def login(request):
             return HttpResponse(json.dumps(ret))
 
         if request.method == 'POST':
-            log_debug('request body: %s' % request.body)
+            #log_debug('request body: %s' % request.body)
             form = json.loads(request.body)
 
             if form:
@@ -117,7 +117,7 @@ def getArticleTitles(request):
     try:
         if request.method == 'GET':
             articleType = request.GET['type_id']
-            log_debug('request GET params: type_id:[%s]' % articleType)
+            #log_debug('request GET params: type_id:[%s]' % articleType)
             articleTitles = Article.objects.filter(type_id=articleType)
             if articleTitles == None:
                 ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
@@ -150,7 +150,7 @@ def addArticle(request):
             return HttpResponse(json.dumps(ret))
 
         if request.method == 'POST':
-            log_debug('request body: %s' % request.body)
+            #log_debug('request body: %s' % request.body)
             form = json.loads(request.body)
 
             if form:
@@ -184,7 +184,7 @@ def getArticleContent(request):
     try:
         if request.method == 'GET':
             articleID = request.GET['article_id']
-            log_debug('request GET params: article_id:[%s]' % articleID)
+            #log_debug('request GET params: article_id:[%s]' % articleID)
             article = Article.objects.filter(article_id=articleID)
             if article == None:
                 ret = return_error(Error(ErrCode.ERR_CODE_INTERNAL_ERROR,
@@ -214,7 +214,7 @@ def modifyArticle(request):
             return HttpResponse(json.dumps(ret))
 
         if request.method == 'POST':
-            log_debug(request.body)
+            #log_debug(request.body)
             form = json.loads(request.body)
 
             if form == None:
