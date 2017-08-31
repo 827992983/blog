@@ -42,6 +42,12 @@ import initdb
 blog home： http://xxx.xxx.xxx.xxx:port/
 blog management: http://xxx.xxx.xxx.xxx:port/admin
 ```
+### FAQ
+```
+1.modify /var/www/blog permission
+2.modify db.sqlite3 file permission
+3.create /var/log/blog.log, ande modify permission
+```
 ### contact:
 ```
 author: Abel Lee 
