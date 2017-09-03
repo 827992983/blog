@@ -41,8 +41,8 @@ def index(request):
     end = start + 5
 
     articlePages = {}
-    articlePages['total'] = total
-    articlePages['index'] = index
+    articlePages['total'] = total if total > 1 else 1
+    articlePages['index'] = index if index > 1 else 1
 
     latest_article_list = Article.objects.filter().order_by("-timestamp")[start:end]
     popular_article_list = Article.objects.filter().order_by("-read_number")[start:end]
@@ -83,8 +83,8 @@ def search(request):
 
     end = start + 5
     articlePages = {}
-    articlePages['total'] = total
-    articlePages['index'] = index
+    articlePages['total'] = total if total > 1 else 1
+    articlePages['index'] = index if index > 1 else 1
 
     latest_article_list = Article.objects.filter(title__contains=keywords).order_by("-timestamp")[start:end]
     popular_article_list = Article.objects.filter(title__contains=keywords).order_by("-read_number")[start:end]
@@ -128,8 +128,8 @@ def indexArticleType(request):
     end = start + 5
 
     articlePages = {}
-    articlePages['total'] = total
-    articlePages['index'] = index
+    articlePages['total'] = total if total > 1 else 1
+    articlePages['index'] = index if index > 1 else 1
 
     latest_article_list = Article.objects.filter(type_id=type_id).order_by("-timestamp")[start:end]
     popular_article_list = Article.objects.filter(type_id=type_id).order_by("-read_number")[start:end]
