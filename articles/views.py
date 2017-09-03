@@ -14,37 +14,131 @@ import common.constants as const
 # Create your views here.
 
 def index(request):
-    latest_article_list = Article.objects.filter().order_by("-timestamp")[0:5]
-    popular_article_list = Article.objects.filter().order_by("-read_number")[0:5]
+    aritcles = Article.objects.filter()
+    if aritcles:
+        total = len(aritcles)
+    else:
+        total = 0
+
+    if total % 5 > 0:
+        total = total/5 + 1
+    else:
+        total = total/5
+
+    if 'page_index' in request.GET:
+        index = int(request.GET['page_index'])
+    else:
+        index = 1
+
+    if index >= total:
+        index = total
+
+    if index > 1:
+        start = (index-1) * 5
+    else:
+        index = 1
+        start = 0
+    end = start + 5
+
+    articlePages = {}
+    articlePages['total'] = total
+    articlePages['index'] = index
+
+    latest_article_list = Article.objects.filter().order_by("-timestamp")[start:end]
+    popular_article_list = Article.objects.filter().order_by("-read_number")[start:end]
     context = {'latest_article_list': latest_article_list,
                'popular_article_list': popular_article_list,}
     articleTypes = ArticleType.objects.filter()
     for item in articleTypes:
         context[item.alias] = {'type_id':item.type_id, 'type_name':item.type_name}
+    context['articlePages'] = articlePages
     return render(request, 'static/articles/index.html', context)
 
 def search(request):
     keywords = request.GET['keywords']
-    latest_article_list = Article.objects.filter(title__contains=keywords).order_by("-timestamp")[0:5]
-    popular_article_list = Article.objects.filter(title__contains=keywords).order_by("-read_number")[0:5]
+    aritcles = Article.objects.filter(title__contains=keywords)
+    if aritcles:
+        total = len(aritcles)
+    else:
+        total = 0
+
+    if total % 5 > 0:
+        total = total / 5 + 1
+    else:
+        total = total / 5
+
+    if 'page_index' in request.GET:
+        index = int(request.GET['page_index'])
+    else:
+        index = 1
+
+    if index >= total:
+        index = total
+
+    if index > 1:
+        start = (index - 1) * 5
+    else:
+        index = 1
+        start = 0
+
+    end = start + 5
+    articlePages = {}
+    articlePages['total'] = total
+    articlePages['index'] = index
+
+    latest_article_list = Article.objects.filter(title__contains=keywords).order_by("-timestamp")[start:end]
+    popular_article_list = Article.objects.filter(title__contains=keywords).order_by("-read_number")[start:end]
     context = {'latest_article_list': latest_article_list,
                'popular_article_list': popular_article_list,}
     articleTypes = ArticleType.objects.filter()
     for item in articleTypes:
         context[item.alias] = {'type_id':item.type_id, 'type_name':item.type_name}
+    context['articlePages'] = articlePages
     return render(request, 'static/articles/index.html', context)
 
 def indexArticleType(request):
     uri = request.path
     paths = uri.split('/')
     type_id = paths[-1]
-    latest_article_list = Article.objects.filter(type_id=type_id).order_by("-timestamp")[0:5]
-    popular_article_list = Article.objects.filter(type_id=type_id).order_by("-read_number")[0:5]
+
+    aritcles = Article.objects.filter(type_id=type_id)
+    if aritcles:
+        total = len(aritcles)
+    else:
+        total = 0
+
+    if total % 5 > 0:
+        total = total / 5 + 1
+    else:
+        total = total / 5
+
+    if 'page_index' in request.GET:
+        index = int(request.GET['page_index'])
+    else:
+        index = 1
+
+    if index >= total:
+        index = total
+
+    if index > 1:
+        start = (index - 1) * 5
+    else:
+        index = 1
+        start = 0
+    end = start + 5
+
+    articlePages = {}
+    articlePages['total'] = total
+    articlePages['index'] = index
+
+    latest_article_list = Article.objects.filter(type_id=type_id).order_by("-timestamp")[start:end]
+    popular_article_list = Article.objects.filter(type_id=type_id).order_by("-read_number")[start:end]
     context = {'latest_article_list': latest_article_list,
                'popular_article_list': popular_article_list,}
     articleTypes = ArticleType.objects.filter()
     for item in articleTypes:
         context[item.alias] = {'type_id':item.type_id, 'type_name':item.type_name}
+    context['articlePages'] = articlePages
     return render(request, 'static/articles/index.html', context)
 
 def article(request):

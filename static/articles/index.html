@@ -10,6 +10,12 @@
     <script type="text/javascript" src="/static/js/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="/static/js/holder.min.js"></script>
 	<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/static/js/common.js"></script>
+	<script type="text/javascript" src="/static/articles/js/index.js"></script>
+	<script type="text/javascript">
+		window.g_total;
+		window.g_total = {{ articlePages.total }};
+	</script>
 
     <title>Yue开源兴趣小组-Blog</title>
 
@@ -150,6 +156,13 @@
 			</div>
 			<hr>
 			{% endfor %}
+			<div class="row pull-right">
+				<a id="prevPage" class="navbar-brand" href="#"><span class="glyphicon glyphicon-chevron-left"></span>上一页</a>
+				<span class="navbar-brand">第 <span id="indexPage">{{ articlePages.index }}</span>/<span id="totalPage">{{ articlePages.total }}</span> 页</span>
+				<a id="nextPage" class="navbar-brand" href="#">下一页<span class="glyphicon glyphicon-chevron-right"></span></a>
+			</div>
+			<div class="row"></div>
+
 		</div><!--/Center Column-->
 
 
