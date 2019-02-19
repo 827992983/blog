@@ -7,6 +7,9 @@
 git clone https://github.com/827992983/blog.git
 ```
 2. install apache and python-django runtime environment.
+```
+pip install Django==1.8.18
+```
 
 3. configure apache 
 ```
