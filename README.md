@@ -9,10 +9,12 @@ git clone https://github.com/827992983/blog.git
 2. install apache and python-django runtime environment.
 ```
 pip install Django==1.8.18
+pip install bcrypt
 ```
 
 3. configure apache 
 ```
+listen 8080
 <VirtualHost *:8080>
 
 	ErrorLog ${APACHE_LOG_DIR}/error.log
